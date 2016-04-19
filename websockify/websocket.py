@@ -748,7 +748,7 @@ class WebSocketServer(object):
 
     @staticmethod
     def daemonize(keepfd=None, chdir='/'):
-        
+
         if keepfd is None:
             keepfd = []
 
@@ -1064,10 +1064,12 @@ class WebSocketServer(object):
                                 break
                         elif multiprocessing:
                             self.vmsg('%s: new handler Process' % address[0])
-                            p = multiprocessing.Process(
-                                    target=self.top_new_client,
-                                    args=(startsock, address))
-                            p.start()
+                            #if __name__ == '__main__':
+                            #p = multiprocessing.Process(
+                            #        target=self.top_new_client,
+                            #        args=(startsock, address))
+                            #p.start()
+                            self.top_new_client(startsock, address)
                             # child will not return
                         else:
                             # python 2.4
